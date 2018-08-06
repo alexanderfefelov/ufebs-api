@@ -29,19 +29,12 @@ object Main extends App {
       |
       |""".stripMargin
 
-  var n = 0
   for (e <- ed807.BICDirectoryEntry) {
     out << s"БИК ${e.BIC} с ${e.ParticipantInfo.DateIn} по ${e.ParticipantInfo.DateOut.getOrElse("---")}"
-    out << s"    Название: ${e.ParticipantInfo.NameP}"
-    out << s"    Адрес: ${e.ParticipantInfo.Ind.getOrElse("---")}, ${e.ParticipantInfo.Tnp.getOrElse("---")} ${e.ParticipantInfo.Nnp.getOrElse("---")}, ${e.ParticipantInfo.Adr.getOrElse("---")}"
+    out << s"    ${e.ParticipantInfo.NameP}, тип: ${e.ParticipantInfo.ParticipantStatus.getOrElse("---")}"
+    out << s"    ${e.ParticipantInfo.Ind.getOrElse("---")}, ${e.ParticipantInfo.Tnp.getOrElse("---")} ${e.ParticipantInfo.Nnp.getOrElse("---")}, ${e.ParticipantInfo.Adr.getOrElse("---")}"
     for (a <- e.Accounts) {
-      out << s"    К/С: ${a.Account} с ${a.DateIn} по ${a.DateOut.getOrElse("---")}"
-    }
-
-    n += 1
-    if (n % 100 == 0) {
-      System.out.print(".")
-      System.out.flush()
+      out << s"    Счёт: ${a.Account} с ${a.DateIn} по ${a.DateOut.getOrElse("---")}, тип: ${a.RegulationAccountType}, статус: ${a.AccountStatus.getOrElse("---")}"
     }
   }
 
