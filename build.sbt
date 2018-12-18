@@ -1,7 +1,7 @@
 name := "ufebs-api"
 organization := "com.github.alexanderfefelov"
 
-crossScalaVersions := Seq("2.11.12", "2.12.6")
+crossScalaVersions := Seq("2.11.12", "2.12.8")
 
 libraryDependencies ++= Seq(
   "org.scala-lang.modules" %% "scala-xml" % "1.1.0",
